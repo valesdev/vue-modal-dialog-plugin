@@ -1,0 +1,138 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="format-detection" content="telephone=no, email=no, address=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+
+    <title>vue-modal-dialog-plugin demo</title>
+
+    <script type="application/javascript" src="//unpkg.com/vue/dist/vue.min.js"></script>
+    <script type="application/javascript" src="//unpkg.com/vuex/dist/vuex.min.js"></script>
+
+    <script type="application/javascript" src="//unpkg.com/vue-modal-dialog-plugin/dist/vue-modal-dialog-plugin.min.js"></script>
+    <link rel="stylesheet" media="all" href="//unpkg.com/vue-modal-dialog-plugin/dist/vue-modal-dialog-plugin.min.css" />
+  </head>
+  <body>
+    <h2>vue-modal-dialog-plugin demo</h2>
+    <div id="app">
+      <p><a href="javascript:void(0)" @click="dialogDemo01">Demo 01: alert (message only)</a></p>
+      <p><a href="javascript:void(0)" @click="dialogDemo02">Demo 02: alert (long message only)</a></p>
+      <p><a href="javascript:void(0)" @click="dialogDemo03">Demo 03: alert (title and long message)</a></p>
+      <p><a href="javascript:void(0)" @click="dialogDemo04">Demo 04: alert (title only)</a></p>
+      <p><a href="javascript:void(0)" @click="dialogDemo05">Demo 05: confirmation (with title and message)</a></p>
+      <p><a href="javascript:void(0)" @click="dialogDemo06">Demo 06: confirmation (with message only)</a></p>
+      <p><a href="javascript:void(0)" @click="dialogDemo07">Demo 07: default input (with title and message)</a></p>
+      <p><a href="javascript:void(0)" @click="dialogDemo08">Demo 08: multiple inputs (with title and message)</a></p>
+      <p><a href="javascript:void(0)" @click="dialogDemo09">Demo 09: title and message in HTML format</a></p>
+      <p><a href="javascript:void(0)" @click="dialogDemo10">Demo 10: title and message in HTML format</a></p>
+      <vue-dialog-holder />
+    </div>
+
+    <script type="application/javascript">
+      window.document.addEventListener('DOMContentLoaded', function () {
+        const store = new Vuex.Store({ strict: true });
+
+        Vue.use(vueModalDialogPlugin, { store: store });
+
+        new Vue({
+          el: '#app',
+          store: store,
+          methods: {
+            dialogDemo01: function () {
+              this.$dialog.alert('Hello dialog!')
+                .then(function (value) {
+                  window.alert(`resolved: ${JSON.stringify(value)}`);
+                 })
+                .catch(function (error) {
+                  window.alert(`rejected: ${JSON.stringify(error.message)}`);
+                });
+            },
+            dialogDemo02: function () {
+              this.$dialog.alert('Terrarum naturae animus derecti inclusum haec. Congestaque imagine erectos. Exemit numero ventos.')
+                .then(function (value) {
+                  window.alert(`resolved: ${JSON.stringify(value)}`);
+                 })
+                .catch(function (error) {
+                  window.alert(`rejected: ${JSON.stringify(error.message)}`);
+                });
+            },
+            dialogDemo03: function () {
+              this.$dialog.alert('Terrarum naturae animus derecti inclusum haec. Congestaque imagine erectos. Exemit numero ventos.', 'The Title Goes Here')
+                .then(function (value) {
+                  window.alert(`resolved: ${JSON.stringify(value)}`);
+                 })
+                .catch(function (error) {
+                  window.alert(`rejected: ${JSON.stringify(error.message)}`);
+                });
+            },
+            dialogDemo04: function () {
+              this.$dialog.alert('', 'Title without Message')
+                .then(function (value) {
+                  window.alert(`resolved: ${JSON.stringify(value)}`);
+                 })
+                .catch(function (error) {
+                  window.alert(`rejected: ${JSON.stringify(error.message)}`);
+                });
+            },
+            dialogDemo05: function () {
+              this.$dialog.confirm('The content will be lost.', 'Confirmation')
+                .then(function (value) {
+                  window.alert(`resolved: ${JSON.stringify(value)}`);
+                 })
+                .catch(function (error) {
+                  window.alert(`rejected: ${JSON.stringify(error.message)}`);
+                });
+            },
+            dialogDemo06: function () {
+              this.$dialog.confirm('Are you sure you want to log out?')
+                .then(function (value) {
+                  window.alert(`resolved: ${JSON.stringify(value)}`);
+                 })
+                .catch(function (error) {
+                  window.alert(`rejected: ${JSON.stringify(error.message)}`);
+                });
+            },
+            dialogDemo07: function () {
+              this.$dialog.prompt('Please enter you name', 'Profile')
+                .then(function (value) {
+                  window.alert(`resolved: ${JSON.stringify(value)}`);
+                 })
+                .catch(function (error) {
+                  window.alert(`rejected: ${JSON.stringify(error.message)}`);
+                });
+            },
+            dialogDemo08: function () {
+              this.$dialog.prompt('Please login to continue', 'Authentication', { inputs: '<input type="email" placeholder="Email Address" /><input type="password" placeholder="Password" />' })
+                .then(function (value) {
+                  window.alert(`resolved: ${JSON.stringify(value)}`);
+                 })
+                .catch(function (error) {
+                  window.alert(`rejected: ${JSON.stringify(error.message)}`);
+                });
+            },
+            dialogDemo09: function () {
+              this.$dialog.alert('<b>Proxima aliis</b> speciem os <u>dextra</u>. Lucis madescit <i>hominum fronde</i> matutinis.', 'Rich Text', { html: true })
+                .then(function (value) {
+                  window.alert(`resolved: ${JSON.stringify(value)}`);
+                 })
+                .catch(function (error) {
+                  window.alert(`rejected: ${JSON.stringify(error.message)}`);
+                });
+            },
+            dialogDemo10: function () {
+              this.$dialog.confirm('Attempt to set your avatar to:<div style="margin-top: 10px;"><img src="https://opensource.org/files/osi_keyhole_300X300_90ppi_0.png" style="display: block; width: 150px; margin-left: auto; margin-right: auto;" /></div>', 'Confirmation', { html: true })
+                .then(function (value) {
+                  window.alert(`resolved: ${JSON.stringify(value)}`);
+                 })
+                .catch(function (error) {
+                  window.alert(`rejected: ${JSON.stringify(error.message)}`);
+                });
+            },
+          }
+        });
+      }, false)
+    </script>
+  </body>
+</html>
