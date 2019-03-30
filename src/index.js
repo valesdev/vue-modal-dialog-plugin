@@ -39,7 +39,7 @@ const vueModalDialogPlugin = {
       message,
       title,
       buttons: [
-        { value: 'ok', label: this.okButtonLabel }
+        { value: 'ok', label: this._getButtonLabel('ok') }
       ]
     }, options))
   },
@@ -49,8 +49,8 @@ const vueModalDialogPlugin = {
       message,
       title,
       buttons: [
-        { value: 'no', label: this.noButtonLabel, secondary: true },
-        { value: 'yes', label: this.yesButtonLabel }
+        { value: 'no', label: this._getButtonLabel('no'), reject: true, secondary: true },
+        { value: 'yes', label: this._getButtonLabel('yes') }
       ]
     }, options))
   },
@@ -61,10 +61,20 @@ const vueModalDialogPlugin = {
       title,
       inputs: '<input type="text">',
       buttons: [
-        { value: 'cancel', label: this.cancelButtonLabel, secondary: true },
-        { value: 'ok', label: this.okButtonLabel }
+        { value: 'cancel', label: this._getButtonLabel('cancel'), reject: true, secondary: true },
+        { value: 'ok', label: this._getButtonLabel('ok') }
       ]
     }, options))
+  },
+
+  _getButtonLabel (type) {
+    if (`${type}ButtonLabel` in this) {
+      if (typeof this[`${type}ButtonLabel`] === 'function') {
+        return this[`${type}ButtonLabel`]()
+      }
+      return this[`${type}ButtonLabel`]
+    }
+    return ''
   }
 }
 

@@ -27,6 +27,7 @@
       <p><a href="javascript:void(0)" @click="dialogDemo08">Demo 08: multiple inputs (with title and message)</a></p>
       <p><a href="javascript:void(0)" @click="dialogDemo09">Demo 09: title and message in HTML format</a></p>
       <p><a href="javascript:void(0)" @click="dialogDemo10">Demo 10: title and message in HTML format</a></p>
+      <p><a href="javascript:void(0)" @click="dialogDemo11">Demo 11: customized buttons</a></p>
       <vue-dialog-holder />
     </div>
 
@@ -122,7 +123,7 @@
                 });
             },
             dialogDemo10: function () {
-              this.$dialog.confirm('Attempt to set your avatar to:<div style="margin-top: 10px;"><img src="https://opensource.org/files/osi_keyhole_300X300_90ppi_0.png" style="display: block; width: 150px; margin-left: auto; margin-right: auto;" /></div>', 'Confirmation', { html: true })
+              this.$dialog.confirm('Attempt to set your avatar to:<div style="margin-top: 10px;"><img src="https://vuejs.org/images/logo.png" style="display: block; width: 150px; margin-left: auto; margin-right: auto;" /></div>', 'Confirmation', { html: true })
                 .then(function (value) {
                   window.alert(`resolved: ${JSON.stringify(value)}`);
                  })
@@ -130,6 +131,21 @@
                   window.alert(`rejected: ${JSON.stringify(error.message)}`);
                 });
             },
+            dialogDemo11: function () {
+              this.$dialog.confirm('Do you have an account?', 'Login', {
+                buttons: [
+                  { value: 'not_sure', label: 'Not sure', secondary: true },
+                  { value: 'no', label: 'No', reject: true },
+                  { value: 'yes', label: 'Yes' }
+                ]
+              })
+                .then(function (value) {
+                  window.alert(`resolved: ${JSON.stringify(value)}`);
+                 })
+                .catch(function (error) {
+                  window.alert(`rejected: ${JSON.stringify(error.message)}`);
+                });
+            }
           }
         });
       }, false)

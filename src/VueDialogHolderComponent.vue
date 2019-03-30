@@ -71,24 +71,35 @@ export default {
     onClickButton (item, button) {
       let value = button.value
 
-      // if using inputs
-      if (item.inputs) {
-        value = []
-        // to retrieve values from inputs
-        const inputs = this.$el.querySelectorAll('.dialog-inputs input, .dialog-inputs textarea, .dialog-inputs select')
-        for (let i = 0; i < inputs.length; i++) {
-          switch (button.value) {
-            case 'ok':
-              value.push(inputs[i].value)
-              break
-            default:
-              value.push(null)
-          }
-        }
-      }
+      if (!button.reject) {
 
-      // resolve with value
-      item.resolveCallback(value)
+        // if using inputs
+        if (item.inputs) {
+
+          // to retrieve values from inputs
+          value = []
+          const inputs = this.$el.querySelectorAll('.dialog-inputs input, .dialog-inputs textarea, .dialog-inputs select')
+          for (let i = 0; i < inputs.length; i++) {
+            switch (button.value) {
+              case 'ok':
+                value.push(inputs[i].value)
+                break
+              default:
+                value.push(null)
+            }
+          }
+
+        }
+
+        // resolve with value
+        item.resolveCallback(value)
+
+      } else {
+
+        // reject with value
+        item.rejectCallback(value)
+
+      }
 
       // close dialog
       return this.$dialog.close({ id: item._id })
@@ -222,7 +233,7 @@ export default {
       flex-grow: 1;
       flex-shrink: 1;
       width: 1%;
-      padding: 12px 16px;
+      padding: 12px 8px;
       background-color: #ffffff;
       font-family: sans-serif;
       font-size: 16px;

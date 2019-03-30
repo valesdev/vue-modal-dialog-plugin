@@ -11,7 +11,7 @@ A modal dialog plugin for mobile, integrated with Vue.js and Vuex.
 
 ## Features
 
-- Only 9.5KB minified while 2.8KB gzipped
+- Only 9.7KB minified while 2.8KB gzipped
 - Integrated with Vue.js as a plugin
 - Show multiple dialogs meanwhile
 - Able to customize buttons and message with HTML supported
@@ -56,6 +56,84 @@ Vue.extend({
   }
 })
 ```
+
+## API
+
+### `Vue.use(vueModalDialogPlugin, options)`
+
+Integrate Vue Modal Dialog Plugin into current Vue runtime.
+
+| Parameter | Type | Description | Default |
+| --- | --- | --- | --- |
+| `options.store` | `Vuex.Store` | A Vuex Store instance. | |
+| `options.okButtonLabel` | string&#124;Function | Default label for the "OK" button. | `'OK'` |
+| `options.cancelButtonLabel` | string&#124;Function | Default label for the "Cancel" button. | `'Cancel'` |
+| `options.yesButtonLabel` | string&#124;Function | Default label for the "Yes" button. | `'Yes'` |
+| `options.noButtonLabel` | string&#124;Function | Default label for the "No" button. | `'No'` |
+
+### `vueModalDialogPlugin.alert(message, title, options)`
+
+Perform an alert dialog with an "OK" button.
+
+The returned `Promise` instance will be resolved when user clicks "OK" button, or rejected when user clicks the background area.
+
+| Parameter | Type | Description | Default |
+| --- | --- | --- | --- |
+| `message` | string&#124;Error | The message. | `''` |
+| `title` | string | The title. | `null` |
+| `options` | object | Additional options (see `open()`). | `{}` |
+
+### `vueModalDialogPlugin.confirm(message, title, options)`
+
+Perform an confirm dialog with "Yes" and "No" button.
+
+The returned `Promise` instance will be resolved when user clicks "Yes" button, or rejected when user clicks the "No" button or the background area.
+
+| Parameter | Type | Description | Default |
+| --- | --- | --- | --- |
+| `message` | string&#124;Error | The message. | `''` |
+| `title` | string | The title. | `null` |
+| `options` | object | Additional options (see `open()`). | `{}` |
+
+### `vueModalDialogPlugin.prompt(message, title, options)`
+
+Perform an prompt dialog with "OK" and "Cancel" button.
+
+A single text input will be placed below the dialog content.
+
+The returned `Promise` instance will be resolved with the values of inputs when user clicks "OK" button, or rejected when user clicks the background area.
+
+| Parameter | Type | Description | Default |
+| --- | --- | --- | --- |
+| `message` | string&#124;Error | The message. | `''` |
+| `title` | string | The title. | `null` |
+| `options` | object | Additional options (see `open()`). | `{}` |
+
+### `vueModalDialogPlugin.open(options)`
+
+Perform a dialog using custom options.
+
+| Parameter | Type | Description | Default |
+| --- | --- | --- | --- |
+| `options` | object | | |
+| `options.message` | string&#124;Error | The message. | `''` |
+| `options.title` | string | The title. | `null` |
+| `options.inputs` | string | HTML code below the title and message.<br />If specified, the returned `Promise` instance will be resolved with the values of all inputs (including `<input>`, `<textarea>` and `<select>`) when user clicks a button with `'ok'` value set. | `null` |
+| `options.buttons` | array | The buttons. | `[]` |
+| `options.buttons[].value` | string | The value of this button. | `[]` |
+| `options.buttons[].label` | string | The label of this button. | `[]` |
+| `options.buttons[].secondary` | boolean | If set to true, a `secondary` class will be added to the button node. | `[]` |
+| `options.buttons[].reject` | boolean | If set to true, the returned `Promise` instance will be rejected with the value of the button when user clicks the button. | `[]` |
+| `options.html` | boolean | Set to true to disable HTML escaping for title and message. | `false` |
+
+### `vueModalDialogPlugin.close(options)`
+
+Close a dialog with specified ID.
+
+| Parameter | Type | Description | Default |
+| --- | --- | --- | --- |
+| `options` | object | | |
+| `options.id` | string | The unique ID of the dialog. | |
 
 ## License
 
