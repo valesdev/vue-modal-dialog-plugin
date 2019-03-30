@@ -97,7 +97,7 @@ export default {
       } else {
 
         // reject with value
-        item.rejectCallback(value)
+        item.rejectCallback(new Error(value))
 
       }
 

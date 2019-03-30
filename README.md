@@ -120,10 +120,10 @@ Perform a dialog using custom options.
 | `options.title` | string | The title. | `null` |
 | `options.inputs` | string | HTML code below the title and message.<br />If specified, the returned `Promise` instance will be resolved with the values of all inputs (including `<input>`, `<textarea>` and `<select>`) when user clicks a button with `'ok'` value set. | `null` |
 | `options.buttons` | array | The buttons. | `[]` |
-| `options.buttons[].value` | string | The value of this button. | `[]` |
-| `options.buttons[].label` | string | The label of this button. | `[]` |
-| `options.buttons[].secondary` | boolean | If set to true, a `secondary` class will be added to the button node. | `[]` |
-| `options.buttons[].reject` | boolean | If set to true, the returned `Promise` instance will be rejected with the value of the button when user clicks the button. | `[]` |
+| `options.buttons[].value` | string | The value of this button. | |
+| `options.buttons[].label` | string | The label of this button. | |
+| `options.buttons[].secondary` | boolean | If set to true, a `secondary` class will be added to the button node. | `false` |
+| `options.buttons[].reject` | boolean | If set to true, the returned `Promise` instance will be rejected with the value of the button when user clicks the button. | `false` |
 | `options.html` | boolean | Set to true to disable HTML escaping for title and message. | `false` |
 
 ### `vueModalDialogPlugin.close(options)`
