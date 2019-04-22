@@ -13,6 +13,7 @@ A modal dialog plugin for mobile, integrated with Vue.js and Vuex.
 
 - Only 9.7KB minified while 2.8KB gzipped
 - Integrated with Vue.js as a plugin
+- Responsive Design
 - Show multiple dialogs meanwhile
 - Able to customize buttons and message with HTML supported
 - API interaction via `Promise`

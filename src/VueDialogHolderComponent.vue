@@ -12,7 +12,7 @@
         class="dialog-wraper"
       >
 
-        <div class="dialog-background" @click="onClickBackground(item)"/>
+        <div class="dialog-background" @click="onClickBackground(item)" />
 
         <div class="dialog-frame">
 
@@ -256,6 +256,42 @@ export default {
       }
     }
   }
+  @media all and (min-width: 769px) {
+    .dialog-frame {
+      min-width: initial;
+      max-width: initial;
+      width: 35vw;
+      border-radius: initial;
+    }
+    .dialog-title {
+      text-align: initial;
+    }
+    .dialog-message {
+      text-align: initial;
+    }
+    .dialog-buttons {
+      justify-content: flex-end;
+      a {
+        flex-grow: 0;
+        flex-shrink: 0;
+        width: initial;
+        padding: 12px 32px;
+        & + a {
+          border-left-width: 0;
+        }
+      }
+    }
+    .dialog-title + .dialog-message {
+      margin-top: 12px;
+    }
+    .dialog-title + .dialog-inputs {
+      margin-top: 16px;
+    }
+    .dialog-message + .dialog-inputs {
+      margin-top: 16px;
+    }
+  }
+
   .vue-dialog-enter-active, .vue-dialog-leave-active {
     transition-property: visibility, opacity;
     transition-duration: .25s;
