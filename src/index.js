@@ -39,7 +39,7 @@ const vueModalDialogPlugin = {
       message,
       title,
       buttons: [
-        { value: 'ok', label: this._getButtonLabel('ok') }
+        { value: 'ok', label: options.okButtonLabel || this._getButtonLabel('ok') }
       ]
     }, options))
   },
@@ -49,8 +49,8 @@ const vueModalDialogPlugin = {
       message,
       title,
       buttons: [
-        { value: 'no', label: this._getButtonLabel('no'), reject: true, secondary: true },
-        { value: 'yes', label: this._getButtonLabel('yes') }
+        { value: 'no', label: options.noButtonLabel || this._getButtonLabel('no'), reject: true, secondary: true },
+        { value: 'yes', label: options.yesButtonLabel || this._getButtonLabel('yes') }
       ]
     }, options))
   },
@@ -61,8 +61,8 @@ const vueModalDialogPlugin = {
       title,
       inputs: '<input type="text">',
       buttons: [
-        { value: 'cancel', label: this._getButtonLabel('cancel'), reject: true, secondary: true },
-        { value: 'ok', label: this._getButtonLabel('ok') }
+        { value: 'cancel', label: options.cancelButtonLabel || this._getButtonLabel('cancel'), reject: true, secondary: true },
+        { value: 'ok', label: options.okButtonLabel || this._getButtonLabel('ok') }
       ]
     }, options))
   },

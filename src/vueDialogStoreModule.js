@@ -38,22 +38,22 @@ export default {
     },
 
     [MUTATION_TYPE_VUE_DIALOG_CLOSE] (state, payload) {
-      if (state.items.length > 0) {
-        if (typeof payload === 'object' && 'id' in payload) {
-          // specified id to close
-          const id = payload.id
+      if (state.items.length <= 0) return
 
-          // find that item
-          for (let i = 0; i < state.items.length; i++) {
-            if (state.items[i]._id === id) {
-              // delete item
-              state.items.splice(i, 1)
-            }
+      if (typeof payload === 'object' && payload !== null && 'id' in payload && payload.id > 0) {
+        // specified id to close
+        const id = payload.id
+
+        // find that item
+        for (let i = 0; i < state.items.length; i++) {
+          if (state.items[i]._id === id) {
+            // delete item
+            state.items.splice(i, 1)
           }
-        } else {
-          // delete the last item
-          state.items.pop()
         }
+      } else {
+        // delete the last item
+        state.items.pop()
       }
     }
   }
